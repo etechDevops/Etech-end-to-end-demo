@@ -33,10 +33,27 @@ pipeline {
     }
    stage('SonarQube - SAST') {
       steps {
+      withSonarQubeEnv('SonarQube') {
      sh '  mvn sonar:sonar \
   -Dsonar.projectKey=etechapp-token \
   -Dsonar.host.url=http://etechdevops2team.eastus.cloudapp.azure.com:9000 \
   -Dsonar.login=ee7a81739c8ac7008f18da50f129fbf914ca98c4 '
+      }
+         timeout(time: 2, unit: 'MINUTES') {
+          script {
+            waitForQualityGate abortPipeline: true
+          }
+        }
+      }
+    }
+     stage('Vulnerability Scan - Docker ') {
+      steps {
+        sh "mvn dependency-check:check"
+      }
+      post {
+        always {
+          dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+        }
       }
     }
       stage('Docker Build and Push') {
