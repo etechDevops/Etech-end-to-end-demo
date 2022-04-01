@@ -48,7 +48,7 @@ pipeline {
     }
      stage('Vulnerability Scan - Docker ') {
       steps {
-        sh "mvn -v"
+        sh "git version"
     }
       stage('Docker Build and Push') {
       steps {
