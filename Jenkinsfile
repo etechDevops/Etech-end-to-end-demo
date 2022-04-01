@@ -96,11 +96,35 @@ pipeline {
     }
       stage('Kubernetes Deployment - DEV') {
       steps {
-        withKubeConfig([credentialsId: 'jenkins-auth']) {
-          sh "sed -i 's#replace#enkengaf32/etechdevops2app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
-          sh "kubectl apply -f k8s_deployment_service.yaml"
+         parallel(
+          "Deployment": {
+            withKubeConfig([credentialsId: 'jenkins-auth']) {
+              sh "bash k8s-deployment.sh"
+            }
+          },
+          "Rollout Status": {
+            withKubeConfig([credentialsId: 'jenkins-auth']) {
+              sh "bash k8s-deployment-rollout-status.sh"
+            }
+          }
+        )
         }
       }
     }
+   post {
+    always {
+      junit 'target/surefire-reports/*.xml'
+      jacoco execPattern: 'target/jacoco.exec'
+      pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
+      //dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+    }
+
+    // success {
+
+    // }
+
+    // failure {
+
+    // }
     }
 }
