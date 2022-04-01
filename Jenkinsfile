@@ -94,6 +94,24 @@ pipeline {
         )
       }
     }
+     stage('Integration Tests - DEV') {
+      steps {
+        script {
+          try {
+            withKubeConfig([credentialsId: 'jenkins-auth']) {
+              sh "bash integration-test.sh"
+            }
+          } catch (e) {
+            withKubeConfig([credentialsId: 'jenkins-auth']) {
+              sh "kubectl -n default rollout undo deploy ${deploymentName}"
+            }
+            throw e
+          }
+        }
+      }
+    }
+
+  }
       stage('Kubernetes Deployment - DEV') {
       steps {
          parallel(
