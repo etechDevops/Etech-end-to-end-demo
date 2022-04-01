@@ -46,11 +46,23 @@ pipeline {
         }
       }
     }
-     stage('Vulnerability Scan - Docker ') {
+//      stage('Vulnerability Scan - Docker ') {
+//       steps {
+//         sh "git version"
+  //}
+     //}
+   stage('Vulnerability Scan - Docker') {
       steps {
-        sh "git version"
+        parallel(
+          "Dependency Scan": {
+            sh "mvn dependency-check:check"
+          },
+          "Trivy Scan": {
+            sh "bash trivy-scan.sh"
+          }
+        )
+      }
     }
-     }
       stage('Docker Build and Push') {
       steps {
         withDockerRegistry([credentialsId: "dockerhub-id", url: ""]) {
