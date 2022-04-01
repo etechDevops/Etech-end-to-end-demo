@@ -111,7 +111,6 @@ pipeline {
       }
     }
 
-  }
       stage('Kubernetes Deployment - DEV') {
       steps {
          parallel(
@@ -145,3 +144,4 @@ pipeline {
 
     // }
     }
+}
