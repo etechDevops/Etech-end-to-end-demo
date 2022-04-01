@@ -55,7 +55,7 @@ pipeline {
       steps {
         parallel(
           "Dependency Scan": {
-            sh "mvn dependency-check:check"
+            sh "git version"
           },
           "Trivy Scan": {
             sh "bash trivy-scan.sh"
