@@ -23,7 +23,7 @@ pipeline {
     }
       stage('Docker Build and Push') {
       steps {
-        withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+        withDockerRegistry([credentialsId: "dockerhub-id", url: ""]) {
           sh 'printenv'
           sh 'docker build -t enkengaf32/etechdevops2app:""$GIT_COMMIT"" .'
           sh 'docker push enkengaf32/etechdevops2app:""$GIT_COMMIT""'
