@@ -50,6 +50,7 @@ pipeline {
       steps {
         sh "git version"
     }
+     }
       stage('Docker Build and Push') {
       steps {
         withDockerRegistry([credentialsId: "dockerhub-id", url: ""]) {
