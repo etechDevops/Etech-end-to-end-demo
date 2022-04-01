@@ -31,6 +31,18 @@ pipeline {
         }
       }
     }
+    stage('SonarQube - SAST') {
+      steps {
+         stage('SonarQube - SAST') {
+      steps {
+       mvn sonar:sonar \
+  -Dsonar.projectKey=etechapp-token \
+  -Dsonar.host.url=http://etechdevops2team.eastus.cloudapp.azure.com:9000 \
+  -Dsonar.login=ee7a81739c8ac7008f18da50f129fbf914ca98c4
+      }
+    }
+      }
+    }
       stage('Docker Build and Push') {
       steps {
         withDockerRegistry([credentialsId: "dockerhub-id", url: ""]) {
