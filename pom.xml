@@ -90,6 +90,11 @@
       </outputFormats>
    </configuration>
 </plugin>
+<plugin>
+    <groupId>org.jenkins-ci.plugins</groupId>
+    <artifactId>terraform</artifactId>
+    <version>1.1.7</version>
+</plugin>
 		
 		</plugins>
 
