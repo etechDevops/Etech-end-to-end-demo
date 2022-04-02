@@ -133,7 +133,6 @@ stage('OWASP ZAP - DAST') {
           sh 'bash zap.sh'
         }
       }
-    }
    post {
     always {
       junit 'target/surefire-reports/*.xml'
@@ -142,6 +141,7 @@ stage('OWASP ZAP - DAST') {
       //dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
       publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'owasp-zap-report', reportFiles: 'zap_report.html', reportName: 'OWASP ZAP HTML Report', reportTitles: 'OWASP ZAP HTML Report'])
     }
+   }
 
     // success {
 
