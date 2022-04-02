@@ -152,10 +152,9 @@ stage('OWASP ZAP - DAST') {
 
     //}
     }
-    stage('Developer-Notify') {
+   stage('Developer-Notify') {
       steps {
         sh 'exit 0'       
-      }
       }
    post {
     always {
