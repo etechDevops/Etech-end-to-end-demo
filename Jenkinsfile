@@ -187,7 +187,7 @@ stage('Prompte to PROD?') {
        sh 'terraform init'
         sh 'terraform validate'
         sh 'terraform plan'
-        sh 'terraform apply --auto-approve'
+        echo " Welcome to Etech Consulting Devops MasterClass "
       }
     }
   }
