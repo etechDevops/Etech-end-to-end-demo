@@ -111,7 +111,7 @@ pipeline {
       }
     }
     
-      stage('Kubernetes Deployment - DEV') {
+    stage('Kubernetes Deployment - DEV') {
       steps {
          parallel(
           "Deployment": {
@@ -127,8 +127,6 @@ pipeline {
         )
         }
       }
-    }
-}
 stage('OWASP ZAP - DAST') {
       steps {
         withKubeConfig([credentialsId: 'jenkins-auth']) {
@@ -151,6 +149,6 @@ stage('OWASP ZAP - DAST') {
 
     // failure {
 
-    // }
+    //}
     }
-}
+  }
