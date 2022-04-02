@@ -6,7 +6,7 @@ pipeline {
     serviceName = "devsecops-svc"
     imageName = "enkengaf32/etechdevops2app:${GIT_COMMIT}"
     applicationURL = "http://etechdevops2team.eastus.cloudapp.azure.com"
-    applicationURI = "/increment/99"
+    applicationURI = "increment/99"
    }
   stages {
       stage('Build Artifact') {
