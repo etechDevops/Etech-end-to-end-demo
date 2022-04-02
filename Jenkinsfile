@@ -128,6 +128,15 @@ pipeline {
         }
       }
     }
+   stage('OWASP ZAP - DAST') {
+      steps {
+        withKubeConfig([credentialsId: 'jenkins-auth']) {
+          sh 'bash zap.sh'
+        }
+      }
+    }
+
+  }
    post {
     always {
       junit 'target/surefire-reports/*.xml'
