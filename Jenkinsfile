@@ -182,5 +182,13 @@ stage('Prompte to PROD?') {
     }
   }
 }
+    stage('Terraform job') {
+      steps{
+       sh 'terraform init'
+        sh 'terraform validate'
+        sh 'terraform plan'
+        sh 'terraform apply --auto-approve'
+      }
+    }
   }
 }
