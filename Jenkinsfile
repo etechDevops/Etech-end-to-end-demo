@@ -66,7 +66,7 @@ pipeline {
             sh "git version"
           },
           "Trivy Scan": {
-            sh "bash /trivy-scan.sh"
+            sh "bash trivy-scan.sh"
           }
         )
       }
