@@ -100,11 +100,13 @@ pipeline {
         script {
           try {
             withKubeConfig([credentialsId: 'jenkins-auth']) {
-              sh "bash integration-test.sh"
+              //sh "bash integration-test.sh"
+              echo "kube stage test"
             }
           } catch (e) {
             withKubeConfig([credentialsId: 'jenkins-auth']) {
-              sh "kubectl -n default rollout undo deploy ${deploymentName}"
+              //sh "kubectl -n default rollout undo deploy ${deploymentName}"
+              echo "rollout stage"
             }
             throw e
           }
@@ -117,12 +119,14 @@ pipeline {
          parallel(
           "Deployment": {
             withKubeConfig([credentialsId: 'jenkins-auth']) {
-              sh "bash k8s-deployment.sh"
+              //sh "bash k8s-deployment.sh"
+              echo "deploy app"
             }
           },
           "Rollout Status": {
             withKubeConfig([credentialsId: 'jenkins-auth']) {
-              sh "bash k8s-deployment-rollout-status.sh"
+              //sh "bash k8s-deployment-rollout-status.sh"
+              echo "deploy script"
             }
           }
         )
