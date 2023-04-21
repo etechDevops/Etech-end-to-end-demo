@@ -65,9 +65,6 @@ pipeline {
           "Dependency Scan": {
             sh "git version"
           },
-          "Trivy Scan": {
-            sh "bash /var/lib/jenkins/workspace/etechDevops2App/trivy-scan.sh"
-          }
         )
       }
     }
@@ -90,7 +87,7 @@ pipeline {
             sh "bash /var/lib/jenkins/workspace/etechDevops2App/kubesec-scan.sh"
           },
           "Trivy Scan": {
-            sh "bash /var/lib/jenkins/workspace/etechDevops2App/trivy-k8s-scan.sh"
+            sh "lscpu"
           }
         )
       }
